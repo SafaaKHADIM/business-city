@@ -41,10 +41,10 @@ var produitSchema = new mongoose.Schema({
         type: String,
     },
     quantite: {
-        type: String,
+        type: Number,
     },
     prix: {
-        type: String,
+        type: Number,
     },
     idVendeur: {
         type: String,

@@ -11,8 +11,12 @@ var app = express();
 
 // middleware
 app.use(bodyParser.json());
+app.use('/uploads',express.static(__dirname + '/uploads'));
 app.use(cors());
 app.use('/api', rtsIndex);
+
+//static routes
+
 
 // error handler
 app.use((err, req, res, next) => {

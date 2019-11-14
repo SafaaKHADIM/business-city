@@ -13,6 +13,10 @@ var vendeurSchema = new mongoose.Schema({
     cin: {
         type: String,
 
+    },
+    email: {
+        type: String,
+
     }
 
 });

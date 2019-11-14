@@ -1,0 +1,8 @@
+produit=(idProduit primary key,designation , prix , deescription, quantite, selectionné, model3dproduct, nbrelikes,nbredislikes, promotion, idCategory foreign keyidBoutique foreign key,designation,prix,...);
+categorie=(idCategorie, nomCategorie, description, model3d);
+boutique=(idBouique,marque);
+commande=(idCommande, dateCommande,idustilisateur foreign key );
+ligneDeCommande=(idProduit foreign key,idCommande foreign key,qte,prix);
+Utilisateur=(idUser, nomUser, adresse tel, mail, username , password, active, type);
+Commentaire=(idProduit foreign key,idustilisateur foreign key);
+ajout=(idVendeur,idProduit);

@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 
-const Vendeur = mongoose.model('Vendeur');
-//________________________________________CRUD_______________________________________________________________
+const Notification = mongoose.model('Notification');
+
+//____________________________________________CRUD___________________________________________________________
 //___________________________________________________________________________________________________________
 //CREATE
-module.exports.addVendeur = (req, res, next) => {
-    var vendeur = new Vendeur();
-    vendeur.codeActivation = req.body.codeActivation;
-    vendeur.isActive = req.body.isActive;
-    vendeur.cin = req.body.cin;
-    vendeur.email = req.body.email;
-    vendeur.save((err, doc) => {
+module.exports.addNotification = (req, res, next) => {
+    var notification = new Notification();
+    notification.date = req.body.date;
+    notification.idUser = req.body.idUser;
+    notification.idProduit = req.body.idProduit;
+    notification.Produitdesignation = req.body.Produitdesignation;
+    notification.productowner = req.body.productowner;
+    notification.save((err, doc) => {
         if (!err)
             res.send(doc);
         else {
@@ -19,38 +21,31 @@ module.exports.addVendeur = (req, res, next) => {
             // else
                 return next(err);
         }
-
     });
 }
 //___________________________________________________________________________________________________________
 //READ
-module.exports.readVendeur = function (req, res) {
-    Vendeur.findById(req.params.id, function (err, vendeur) {
-        if (err) return next(err);
-        res.send(vendeur);
+module.exports.readNotification = function (req, res) {
+    Notification.find({productowner : req.params.id}, function (err, notification) {
+        if (err)   res.send(err);
+        res.send(notification);
     })
 };
 //___________________________________________________________________________________________________________
 //Delete
-module.exports.deleteVendeur = function (req, res) {
-    Vendeur.findByIdAndRemove(req.params.id, function (err) {
-        if (err) return next(err);
+module.exports.deleteNotification = function (req, res) {
+    Notification.findByIdAndRemove(req.params.id, function (err) {
+        if (err)   res.send(err);
         res.send('Deleted successfully!');
     })
 };
 //___________________________________________________________________________________________________________
 //UPDATE
-module.exports.updateVendeur = function (req, res) {
-    Vendeur.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+module.exports.updateNotification = function (req, res) {
+    Notification.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, notification) {
         if (err) return next(err);
         res.send('Udpated successfully!');
     });
 };
 //____________________________________________CRUD_END_______________________________________________________
 //___________________________________________________________________________________________________________
-module.exports.requesteVendeur = function (req, res) {
-    User.update({cin : req.params.id} ,  {$set: req.body}, function (err) {
-        if (err) return next(err);
-        res.send('Udpated successfully!');
-    });
-};

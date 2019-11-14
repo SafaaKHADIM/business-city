@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 
-const Vendeur = mongoose.model('Vendeur');
-//________________________________________CRUD_______________________________________________________________
+const Message = mongoose.model('Message');
+
+//____________________________________________CRUD___________________________________________________________
 //___________________________________________________________________________________________________________
 //CREATE
-module.exports.addVendeur = (req, res, next) => {
-    var vendeur = new Vendeur();
-    vendeur.codeActivation = req.body.codeActivation;
-    vendeur.isActive = req.body.isActive;
-    vendeur.cin = req.body.cin;
-    vendeur.email = req.body.email;
-    vendeur.save((err, doc) => {
+module.exports.addMessage = (req, res, next) => {
+    var message = new Message();
+    message.date = req.body.date;
+    message.idUser = req.body.idUser;
+    message.idProduit = req.body.idProduit;
+    message.Produitdesignation = req.body.Produitdesignation;
+    message.productowner = req.body.productowner;
+    message.save((err, doc) => {
         if (!err)
             res.send(doc);
         else {
@@ -19,38 +21,31 @@ module.exports.addVendeur = (req, res, next) => {
             // else
                 return next(err);
         }
-
     });
 }
 //___________________________________________________________________________________________________________
 //READ
-module.exports.readVendeur = function (req, res) {
-    Vendeur.findById(req.params.id, function (err, vendeur) {
-        if (err) return next(err);
-        res.send(vendeur);
+module.exports.readMessage = function (req, res) {
+    Message.find({productowner : req.params.id}, function (err, message) {
+        if (err)   res.send(err);
+        res.send(message);
     })
 };
 //___________________________________________________________________________________________________________
 //Delete
-module.exports.deleteVendeur = function (req, res) {
-    Vendeur.findByIdAndRemove(req.params.id, function (err) {
-        if (err) return next(err);
+module.exports.deleteMessage = function (req, res) {
+    Message.findByIdAndRemove(req.params.id, function (err) {
+        if (err)   res.send(err);
         res.send('Deleted successfully!');
     })
 };
 //___________________________________________________________________________________________________________
 //UPDATE
-module.exports.updateVendeur = function (req, res) {
-    Vendeur.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+module.exports.updateMessage = function (req, res) {
+    Message.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, message) {
         if (err) return next(err);
         res.send('Udpated successfully!');
     });
 };
 //____________________________________________CRUD_END_______________________________________________________
 //___________________________________________________________________________________________________________
-module.exports.requesteVendeur = function (req, res) {
-    User.update({cin : req.params.id} ,  {$set: req.body}, function (err) {
-        if (err) return next(err);
-        res.send('Udpated successfully!');
-    });
-};

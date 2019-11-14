@@ -13,3 +13,6 @@ require('./commentaire.model');
 require('./panier.model');
 require('./produit.model');
 require('./vendeur.model');
+require('./pannier.model');
+require('./message.model');
+require('./notification.model');

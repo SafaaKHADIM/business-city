@@ -32,7 +32,7 @@ var userSchema = new mongoose.Schema({
       //  minlength : [4,'Password must be atleast 4 character long']
     },
     isVendeur: {
-        type: Boolean,
+        type: String,
 
     },
     idVendeur: {
@@ -40,7 +40,7 @@ var userSchema = new mongoose.Schema({
 
     },
     isAdmin: {
-        type: Boolean,
+        type: String,
 
     },
     idAdmin: {
@@ -72,15 +72,15 @@ var userSchema = new mongoose.Schema({
 // }, 'Invalid e-mail.');
 
 // Events
-userSchema.pre('save', function (next) {
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(this.password, salt, (err, hash) => {
-            this.password = hash;
-            this.saltSecret = salt;
-            next();
-        });
-    });
-});
+// userSchema.pre('save', function (next) {
+//     bcrypt.genSalt(10, (err, salt) => {
+//         bcrypt.hash(this.password, salt, (err, hash) => {
+//             this.password = hash;
+//             this.saltSecret = salt;
+//             next();
+//         });
+//     });
+// });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User ;

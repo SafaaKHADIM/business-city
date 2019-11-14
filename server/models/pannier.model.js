@@ -27,6 +27,6 @@ var pannierSchema = new mongoose.Schema({
 });
 
 
-const Pannier = mongoose.model('Pannier', pannierSchema);
+const Panier = mongoose.model('Panier', pannierSchema);
 
-module.exports = Pannier ;
+module.exports = Panier ;
